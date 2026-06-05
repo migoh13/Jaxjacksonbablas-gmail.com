@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jackson Bablas Matete | Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+/* ===== CSS VARIABLES & RESET ===== */
+:root {
+  --bg: #0a0f1e;
+  --bg2: #111827;
+  --bg3: #1a2235;
+  --accent: #00e5ff;
+  --accent2: #7c3aed;
+  --accent3: #10b981;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --border: rgba(0,229,255,0.15);
+  --card: rgba(17,24,39,0.8);
+  --font-head: 'Syne', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+  --radius: 12px;
+  --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+body.light {
+  --bg: #f0f4ff;
+  --bg2: #e2e8f0;
+  --bg3: #cbd5e1;
+  --accent: #0369a1;
+  --accent2: #7c3aed;
+  --accent3: #059669;
+  --text: #0f172a;
+  --muted: #475569;
+  --border: rgba(3,105,161,0.2);
+  --card: rgba(255,255,255,0.85);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 15px;
+  line-height: 1.7;
+  transition: background var(--transition), color var(--transition);
+  overflow-x: hidden;
+}
+
+/* ===== BACKGROUND GRID ===== */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+body.light::before {
+  background-image:
+    linear-gradient(rgba(3,105,161,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(3,105,161,0.05) 1px, transparent 1px);
+}
+
+/* ===== LAYOUT ===== */
+.wrapper { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+/* ===== HEADER / NAV ===== */
+header {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(10,15,30,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: background var(--transition);
+}
+body.light header { background: rgba(240,244,255,0.85); }
+.nav-logo {
+  font-family: var(--font-head); font-size: 18px; font-weight: 800;
+  color: var(--accent); letter-spacing: -0.5px;
+}
+.nav-logo span { color: var(--text); }
+.nav-controls { display: flex; gap: 10px; align-items: center; }
+.btn-icon {
+  background: var(--bg3); border: 1px solid var(--border);
+  color: var(--text); border-radius: 8px;
+  padding: 7px 14px; cursor: pointer; font-family: var(--font-mono);
+  font-size: 12px; transition: all var(--transition);
+}
+.btn-icon:hover { background: var(--accent); color: #000; border-color: var(--accent); }
+#clock {
+  font-family: var(--font-mono); font-size: 13px;
+  color: var(--accent); background: var(--bg3);
+  border: 1px solid var(--border); border-radius: 8px;
+  padding: 7px 12px; letter-spacing: 1px; min-width: 90px; text-align: center;
+}
+
+/* ===== HERO ===== */
+.hero {
+  padding: 80px 0 60px;
+  display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center;
+}
+.hero-text h1 {
+  font-family: var(--font-head); font-size: clamp(32px,5vw,56px);
+  font-weight: 800; line-height: 1.1; color: var(--text);
+  margin-bottom: 16px;
+}
+.hero-text h1 em { color: var(--accent); font-style: normal; }
+.hero-text .subtitle {
+  font-size: 13px; color: var(--muted); margin-bottom: 8px;
+  text-transform: uppercase; letter-spacing: 2px;
+}
+#typewriter {
+  font-size: 15px; color: var(--text); min-height: 48px;
+  border-left: 2px solid var(--accent); padding-left: 12px;
+  display: block; margin-top: 12px;
+}
+.hero-img {
+  position: relative; flex-shrink: 0;
+}
+.hero-img img {
+  width: 160px; height: 200px; object-fit: cover;
+  border-radius: var(--radius); border: 2px solid var(--accent);
+  display: block; cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.hero-img img:hover { transform: scale(1.03); box-shadow: 0 0 24px rgba(0,229,255,0.3); }
+.hero-badge {
+  position: absolute; bottom: -10px; right: -10px;
+  background: var(--accent2); color: #fff;
+  font-size: 10px; letter-spacing: 1px; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 20px; font-family: var(--font-head);
+}
+
+/* ===== SECTION COMMON ===== */
+section { padding: 60px 0; border-top: 1px solid var(--border); }
+.section-label {
+  font-size: 11px; text-transform: uppercase; letter-spacing: 3px;
+  color: var(--accent); margin-bottom: 8px; font-family: var(--font-head);
+}
+.section-title {
+  font-family: var(--font-head); font-size: 28px; font-weight: 800;
+  color: var(--text); margin-bottom: 28px;
+}
+
+/* ===== PREFACE CARD ===== */
+.preface-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 28px; position: relative; overflow: hidden;
+}
+.preface-card::before {
+  content: ''; position: absolute; top: 0; left: 0;
+  width: 4px; height: 100%; background: var(--accent);
+}
+.preface-card p { color: var(--text); margin-bottom: 16px; }
+.preface-card p:last-child { margin-bottom: 0; }
+.bib-title { color: var(--accent); font-weight: 700; margin-bottom: 8px; }
+.bib-list { list-style: none; padding: 0; }
+.bib-list li {
+  padding: 6px 0; border-bottom: 1px solid var(--border);
+  color: var(--muted); font-size: 13px;
+}
+.bib-list li:last-child { border-bottom: none; }
+
+/* ===== SKILLS ===== */
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 12px; }
+.skill-item {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden;
+  cursor: pointer; transition: border-color var(--transition), box-shadow var(--transition);
+}
+.skill-item:hover { border-color: var(--accent); box-shadow: 0 0 16px rgba(0,229,255,0.1); }
+.skill-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 20px;
+}
+.skill-name { font-family: var(--font-head); font-weight: 600; color: var(--text); }
+.skill-icon { color: var(--accent); font-size: 18px; transition: transform var(--transition); }
+.skill-item.open .skill-icon { transform: rotate(45deg); }
+.skill-details {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1), padding 0.3s;
+  padding: 0 20px; font-size: 13px; color: var(--muted);
+}
+.skill-details.open { max-height: 200px; padding: 0 20px 16px; }
+.skill-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.tag {
+  background: rgba(0,229,255,0.1); border: 1px solid rgba(0,229,255,0.2);
+  color: var(--accent); font-size: 11px; padding: 3px 10px; border-radius: 20px;
+  font-family: var(--font-head); letter-spacing: 0.5px;
+}
+
+/* ===== EDUCATION TABLE ===== */
+.table-controls { display: flex; gap: 10px; margin-bottom: 16px; align-items: center; }
+.sort-btn {
+  background: var(--bg3); border: 1px solid var(--border);
+  color: var(--text); padding: 7px 16px; border-radius: 8px;
+  cursor: pointer; font-family: var(--font-mono); font-size: 12px;
+  transition: all var(--transition); display: flex; align-items: center; gap: 6px;
+}
+.sort-btn:hover { background: var(--accent); color: #000; border-color: var(--accent); }
+.sort-arrow { font-size: 10px; }
+table {
+  width: 100%; border-collapse: collapse; font-size: 14px;
+  background: var(--card); border-radius: var(--radius); overflow: hidden;
+  border: 1px solid var(--border);
+}
+thead th {
+  background: rgba(0,229,255,0.08); color: var(--accent);
+  font-family: var(); font-size: 12px; text-transform: uppercase;
+  letter-spacing: 1px; padding: 14px 18px; text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+tbody tr {
+  border-bottom: 1px solid var(--border);
+  transition: background var(--transition);
+}
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover { background: rgba(0,229,255,0.04); }
+td { padding: 13px 18px; color: var(--text); }
+td:last-child {
+  font-family: var(--font-mono); color: var(--accent3);
+  font-size: 13px; font-weight: 700;
+}
+
+/* ===== HOBBIES ===== */
+.hobbies-text {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 24px; position: relative;
+}
+.hobbies-inner {
+  overflow: hidden; max-height: 56px; /* ~2 lines */
+  transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1);
+  color: var(--text);
+}
+.hobbies-inner.expanded { max-height: 500px; }
+.hobbies-list { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; padding: 0; }
+.hobbies-list li {
+  background: rgba(124,58,237,0.1); border: 1px solid rgba(124,58,237,0.25);
+  color: var(--text); padding: 6px 14px; border-radius: 20px;
+  font-size: 13px; font-family: var(--font-head);
+}
+.read-more-btn {
+  margin-top: 12px; background: none; border: 1px solid var(--border);
+  color: var(--accent); cursor: pointer; padding: 7px 16px;
+  border-radius: 8px; font-family: var(--font-mono); font-size: 12px;
+  transition: all var(--transition);
+}
+.read-more-btn:hover { background: var(--accent); color: #000; border-color: var(--accent); }
+
+/* ===== IMAGE SECTION ===== */
+.image-grid { display: flex; gap: 16px; flex-wrap: wrap; }
+.img-thumb {
+  position: relative; cursor: pointer;
+  border-radius: var(--radius); overflow: hidden;
+  border: 1px solid var(--border);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.img-thumb:hover { transform: scale(1.03); box-shadow: 0 0 20px rgba(0,229,255,0.2); }
+.img-thumb img { display: block; width: 160px; height: 200px; object-fit: cover; }
+.img-thumb .overlay {
+  position: absolute; inset: 0; background: rgba(0,229,255,0.15);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity var(--transition);
+  font-size: 28px; color: #fff;
+}
+.img-thumb:hover .overlay { opacity: 1; }
+
+/* ===== LIGHTBOX ===== */
+.lightbox {
+  display: none; position: fixed; inset: 0; z-index: 999;
+  background: rgba(0,0,0,0.92); align-items: center; justify-content: center;
+}
+.lightbox.active { display: flex; }
+.lightbox img {
+  max-width: 90vw; max-height: 85vh;
+  border-radius: var(--radius); border: 2px solid var(--accent);
+  box-shadow: 0 0 60px rgba(0,229,255,0.3);
+}
+.lightbox-close {
+  position: absolute; top: 24px; right: 28px;
+  background: var(--bg3); border: 1px solid var(--border); color: var(--text);
+  width: 40px; height: 40px; border-radius: 50%; cursor: pointer;
+  font-size: 20px; display: flex; align-items: center; justify-content: center;
+  transition: all var(--transition);
+}
+.lightbox-close:hover { background: var(--accent); color: #000; }
+
+/* ===== LINKS SECTION ===== */
+.links-grid { display: flex; gap: 14px; flex-wrap: wrap; }
+.social-link {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  text-decoration: none; color: var(--text);
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 18px 24px;
+  transition: all var(--transition); min-width: 90px;
+}
+.social-link img { width: 36px; height: 36px; object-fit: contain; border-radius: 6px; }
+.social-link span { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+.social-link:hover { border-color: var(--accent); background: rgba(0,229,255,0.06); transform: translateY(-3px); }
+
+/* ===== FOOTER ===== */
+footer {
+  text-align: center; padding: 32px 24px;
+  border-top: 1px solid var(--border);
+  font-size: 13px; color: var(--muted);
+  font-family: var(--font-head);
+}
+footer strong { color: var(--accent); }
+
+/* ===== SCROLL TO TOP ===== */
+#scroll-top {
+  position: fixed; bottom: 28px; right: 28px; z-index: 200;
+  background: var(--accent); color: #000; border: none;
+  width: 44px; height: 44px; border-radius: 50%;
+  cursor: pointer; font-size: 18px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity var(--transition), transform var(--transition);
+  box-shadow: 0 4px 20px rgba(0,229,255,0.4);
+}
+#scroll-top.visible { opacity: 1; pointer-events: all; }
+#scroll-top:hover { transform: translateY(-3px) scale(1.05); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="nav-logo">Migoh<span>.</span></div>
+  <div class="nav-controls">
+    <div id="clock">00:00:00</div>
+    <button class="btn-icon" id="theme-toggle">🌙 Dark</button>
+  </div>
+</header>
+
+<!-- SCROLL TO TOP -->
+<button id="scroll-top" aria-label="Scroll to top">↑</button>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-label="Image lightbox">
+  <button class="lightbox-close" id="lightbox-close">✕</button>
+  <img id="lightbox-img" src="" alt="Enlarged image">
+</div>
+
+<div class="wrapper">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-text">
+      <p class="subtitle">BSc Business Information Technology — UDSM</p>
+      <h1>Jackson<br><em>Bablas Matete</em></h1>
+      <span id="typewriter"></span>
+    </div>
+    <div class="hero-img">
+      <img src="Bablas.png" alt="Jackson Bablas Matete" id="hero-photo" class="lightbox-trigger">
+      <span class="hero-badge">UDSM Student</span>
+    </div>
+  </div>
+
+  <!-- PREFACE -->
+  <section id="about">
+    <p class="section-label">01 — About</p>
+    <h2 class="section-title">Preface</h2>
+    <div class="preface-card">
+      <p>Welcome to my personal Portfolio Website. I am a student from the <strong>University of Dar es Salaam pursuing a Bachelor of Science in Business Information Technology (BSc BIT)</strong> in the College of Information and Communication Technology (COICT).</p>
+      <p>This website presents my academic journey, skills, and projects that reflect how we connect business and technology in real life. My goal is to grow professionally and use technology to solve business problems in today's digital world.</p>
+      <p class="bib-title">// Bibliography</p>
+      <ul class="bib-list">
+        <li>Smith, John. <em>Introduction to Information Technology.</em> New York: TechPress, 2020.</li>
+        <li>Brown, Alice. <em>Digital Systems and Applications.</em> London: Future Books, 2019.</li>
+        <li>Johnson, Mark. "The Role of IT in Modern Society." <em>Journal of Technology,</em> vol.12 no.3, 2021, pp. 45–52.</li>
+        <li>World Health Organization. <em>Global Health Report 2022.</em> Geneva: WHO, 2022.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <p class="section-label">02 — Skills</p>
+    <h2 class="section-title">Technical Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-item" tabindex="0">
+        <div class="skill-header">
+          <span class="skill-name">Programming</span>
+          <span class="skill-icon">+</span>
+        </div>
+        <div class="skill-details">
+          I can write structured programs in HTML for web content and Python for scripting and automation. Currently expanding into JavaScript.
+          <div class="skill-tags"><span class="tag">HTML</span><span class="tag">Python</span><span class="tag">JavaScript</span></div>
+        </div>
+      </div>
+      <div class="skill-item" tabindex="0">
+        <div class="skill-header">
+          <span class="skill-name">Computer Skills</span>
+          <span class="skill-icon">+</span>
+        </div>
+        <div class="skill-details">
+          Proficient in productivity tools, data analysis software, and design. SPSS for statistical analysis, graphic design tools for visual output.
+          <div class="skill-tags"><span class="tag">MS Word</span><span class="tag">Excel</span><span class="tag">SPSS</span><span class="tag">Graphic Design</span></div>
+        </div>
+      </div>
+      <div class="skill-item" tabindex="0">
+        <div class="skill-header">
+          <span class="skill-name">Communication</span>
+          <span class="skill-icon">+</span>
+        </div>
+        <div class="skill-details">
+          Strong public speaking skills developed through academic presentations. Effective written and verbal communication in professional settings.
+          <div class="skill-tags"><span class="tag">Public Speaking</span><span class="tag">Teamwork</span><span class="tag">Presentation</span></div>
+        </div>
+      </div>
+      <div class="skill-item" tabindex="0">
+        <div class="skill-header">
+          <span class="skill-name">Cybersecurity</span>
+          <span class="skill-icon">+</span>
+        </div>
+        <div class="skill-details">
+          Pursuing ethical hacking knowledge through platforms like TryHackMe. Interested in penetration testing, network security, and Linux fundamentals.
+          <div class="skill-tags"><span class="tag">Linux</span><span class="tag">Networking</span><span class="tag">TryHackMe</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <p class="section-label">03 — Education</p>
+    <h2 class="section-title">Academic Journey</h2>
+    <div class="table-controls">
+      <button class="sort-btn" id="sort-btn">
+        Sort by Year <span class="sort-arrow" id="sort-arrow">↑</span>
+      </button>
+    </div>
+    <table id="edu-table">
+      <thead>
+        <tr>
+          <th>Level</th>
+          <th>Institution</th>
+          <th>Year</th>
+        </tr>
+      </thead>
+      <tbody id="edu-tbody">
+        <tr><td>Primary Education</td><td>Mkudi Pre &amp; Primary School</td><td>2018</td></tr>
+        <tr><td>Secondary Education</td><td>Kiloleli Secondary School</td><td>2022</td></tr>
+        <tr><td>Advanced Secondary</td><td>Sengerema Boys High School</td><td>2025</td></tr>
+        <tr><td>University Education</td><td>University of Dar es Salaam (UDSM)</td><td>2025 -(present)</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- HOBBIES -->
+  <section id="hobbies">
+    <p class="section-label">04 — Interests</p>
+    <h2 class="section-title">Hobbies</h2>
+    <div class="hobbies-text">
+      <div class="hobbies-inner" id="hobbies-inner">
+        <ul class="hobbies-list">
+          <li>🖥️ Web Development</li>
+          <li>🏊 Swimming</li>
+          <li>📚 Reading Books</li>
+          <li>🔐 Ethical Hacking</li>
+          <li>🏀 Basketball</li>
+          <li>⚽ Soccer / Football</li>
+          <li>✈️ Travel &amp; Vacation</li>
+          <li>🎨 Graphic Design</li>
+          <li>🤖 Learning AI &amp; Cybersecurity</li>
+        </ul>
+        <p style="margin-top:14px; color: var(--muted); font-size:13px;">I am passionate about combining technology and creativity. Whether it's building websites, playing football, or exploring ethical hacking platforms, I always look for ways to challenge myself and grow both technically and personally.</p>
+      </div>
+      <button class="read-more-btn" id="read-more-btn">Read More ↓</button>
+    </div>
+  </section>
+
+  <!-- IMAGES -->
+  <section id="gallery">
+    <p class="section-label">05 — Gallery</p>
+    <h2 class="section-title">Personal Images</h2>
+    <div class="image-grid">
+      <div class="image-item">
+        <img src="Bablas.png" width="400" height="300" alt="Jackson Bablas Matete" class="gallery-image">
+        <div class="overlay"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LINKS -->
+  <section id="links">
+    <p class="section-label">06 — Connect</p>
+    <h2 class="section-title">Favourite Links</h2>
+    <div class="links-grid">
+      <a href="https://www.youtube.com/" class="social-link" target="_blank" rel="noopener">
+        <img src="gallery/youtube.jpeg" alt="YouTube Icon" class="social-icon">
+        <span>YouTube</span>
+      </a>
+      <a href="https://www.tiktok.com" class="social-link" target="_blank" rel="noopener">
+        <img src="tiktok.png" alt="TikTok Icon" class="social-icon">
+        <span>TikTok</span>
+      </a>
+      <a href="https://www.twitter.com" class="social-link" target="_blank" rel="noopener">
+        <img src="gallery/twitter.jpeg" alt="Twitter Icon" class="social-icon">
+        <span>Twitter</span>
+      </a>
+      <a href="https://www.google.com" class="social-link" target="_blank" rel="noopener">
+        <img src="gallery/google.jpeg" alt="Google Icon" class="social-icon">
+        <span>Google</span>
+      </a>
+    </div>
+  </section>
+
+</div><!-- /wrapper -->
+
+<footer>
+  &copy; <strong>Jackson Bablas Matete</strong> — All rights reserved · 2026
+</footer>
+
+<script>
+// ============================================================
+// 1. REAL-TIME DIGITAL CLOCK (setInterval)
+// ============================================================
+function updateClock() {
+  const now = new Date();
+  const h = String(now.getHours()).padStart(2,'0');
+  const m = String(now.getMinutes()).padStart(2,'0');
+  const s = String(now.getSeconds()).padStart(2,'0');
+  document.getElementById('clock').textContent = h + ':' + m + ':' + s;
+}
+updateClock();
+setInterval(updateClock, 1000);
+
+// ============================================================
+// 2. TYPEWRITER EFFECT (setTimeout loop)
+// ============================================================
+var messages = [
+  "Studying BSc Business Information Technology at UDSM.",
+  "Passionate about web development & cybersecurity.",
+  "Building technology solutions for business problems.",
+  "Future software developer from Tanzania."
+];
+var msgIndex = 0, charIndex = 0, isDeleting = false;
+var typeEl = document.getElementById('typewriter');
+
+function typeWriter() {
+  var current = messages[msgIndex];
+  if (isDeleting) {
+    charIndex--;
+  } else {
+    charIndex++;
+  }
+  typeEl.textContent = current.substring(0, charIndex);
+  var speed = isDeleting ? 40 : 70;
+  if (!isDeleting && charIndex === current.length) {
+    speed = 1800;
+    isDeleting = true;
+  } else if (isDeleting && charIndex === 0) {
+    isDeleting = false;
+    msgIndex = (msgIndex + 1) % messages.length;
+    speed = 400;
+  }
+  setTimeout(typeWriter, speed);
+}
+typeWriter();
+
+// ============================================================
+// 3. DARK / LIGHT MODE TOGGLE
+// ============================================================
+var themeBtn = document.getElementById('theme-toggle');
+var isLight = false;
+themeBtn.addEventListener('click', function() {
+  isLight = !isLight;
+  document.body.classList.toggle('light', isLight);
+  themeBtn.textContent = isLight ? '🌙 Dark' : '☀️ Light';
+});
+
+// ============================================================
+// 4. SKILL ITEMS — SHOW/HIDE TOGGLE (classList)
+// ============================================================
+document.querySelectorAll('.skill-item').forEach(function(item) {
+  function toggle() {
+    var details = item.querySelector('.skill-details');
+    var icon = item.querySelector('.skill-icon');
+    var isOpen = details.classList.contains('open');
+    // Close all others first
+    document.querySelectorAll('.skill-details').forEach(function(d) {
+      d.classList.remove('open');
+    });
+    document.querySelectorAll('.skill-item').forEach(function(i) {
+      i.classList.remove('open');
+    });
+    if (!isOpen) {
+      details.classList.add('open');
+      item.classList.add('open');
+    }
+  }
+  item.addEventListener('click', toggle);
+  item.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+  });
+});
+
+// ============================================================
+// 5. EDUCATION TABLE — SORT BY YEAR (asc/desc toggle)
+// ============================================================
+var sortAsc = true;
+document.getElementById('sort-btn').addEventListener('click', function() {
+  var tbody = document.getElementById('edu-tbody');
+  var rows = Array.from(tbody.querySelectorAll('tr'));
+  rows.sort(function(a, b) {
+    var ya = parseInt(a.cells[2].textContent) || 9999;
+    var yb = parseInt(b.cells[2].textContent) || 9999;
+    return sortAsc ? ya - yb : yb - ya;
+  });
+  rows.forEach(function(row) { tbody.appendChild(row); });
+  sortAsc = !sortAsc;
+  document.getElementById('sort-arrow').textContent = sortAsc ? '↑' : '↓';
+});
+
+// ============================================================
+// 6. HOBBIES — READ MORE / READ LESS TOGGLE
+// ============================================================
+var readMoreBtn = document.getElementById('read-more-btn');
+var hobbiesInner = document.getElementById('hobbies-inner');
+var expanded = false;
+readMoreBtn.addEventListener('click', function() {
+  expanded = !expanded;
+  hobbiesInner.classList.toggle('expanded', expanded);
+  readMoreBtn.textContent = expanded ? 'Read Less ↑' : 'Read More ↓';
+});
+
+// ============================================================
+// 7. IMAGE LIGHTBOX — click to open overlay with close button
+// ============================================================
+var lightbox = document.getElementById('lightbox');
+var lightboxImg = document.getElementById('lightbox-img');
+var lightboxClose = document.getElementById('lightbox-close');
+
+document.querySelectorAll('.lightbox-trigger').forEach(function(el) {
+  el.addEventListener('click', function() {
+    var src = el.dataset.src || el.querySelector('img')?.src || el.src;
+    lightboxImg.src = src;
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  });
+});
+lightboxClose.addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', function(e) {
+  if (e.target === lightbox) closeLightbox();
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeLightbox();
+});
+function closeLightbox() {
+  lightbox.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// Also make hero photo trigger lightbox
+document.getElementById('hero-photo').addEventListener('click', function() {
+  lightboxImg.src = this.src;
+  lightbox.classList.add('active');
+  document.body.style.overflow = 'hidden';
+});
+
+// ============================================================
+// 8. SCROLL-TO-TOP BUTTON (appears after 200px scroll)
+// ============================================================
+var scrollBtn = document.getElementById('scroll-top');
+window.addEventListener('scroll', function() {
+  if (window.scrollY > 200) {
+    scrollBtn.classList.add('visible');
+  } else {
+    scrollBtn.classList.remove('visible');
+  }
+});
+scrollBtn.addEventListener('click', function() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+</script>
+</body>
+</html>
