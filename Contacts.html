@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="contacts.css">
+</head>
+
+<body>
+    <section>
+        <a href="mailto:mlasualexander@gmail.com">mlasualexander@gmail.com</a>
+
+        <h1>Contact Us</h1>
+    </section>
+
+
+    <section class="card">
+        <h2>Get in Touch</h2>
+        <p>If you have any questions or would like to get in touch with us, please fill out the form below:</p>
+
+        <form action="submit_form.php" method="post">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br><br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br><br>
+
+            <label for="message">Message:</label><br>
+            <textarea id="message" name="message" rows="5" cols="40" required></textarea><br><br>
+        </form>
+    </section>
+
+
+    <section class="card">
+        <label for=" gender">Gender:</label><br>
+        <input type="radio" id="male" name="gender" value="male" required>
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="gender" value="female" required>
+        <label for="female">Female</label><br><br>
+    </section>
+
+    <section class="card">
+        <h2>INTERESTS:</h2>
+        <input type="checkbox" id="interest1" name="interests" value="Technology">
+        <label for="interest1">Technology</label><br>
+        <input type="checkbox" id="interest2" name="interests" value="Business">
+        <label for="interest2">Business</label><br>
+        <input type="checkbox" id="interest3" name="interests" value="Design">
+        <label for="interest3">Design</label><br><br>
+    </section>
+
+    <section class="card">
+        <h2>COUNTRY:</h2>
+        <select id="country" name="country" required>
+            <option value="">Select your country</option>
+            <option value="Tanzania">Tanzania</option>
+            <option value="Kenya">Kenya</option>
+            <option value="Uganda">Uganda</option>
+            <option value="Rwanda">Rwanda</option>
+            <option value="Burundi">Burundi</option>
+        </select><br><br>
+    </section>
+
+    <section class="card">
+        <h2>FEEDBACK:</h2>
+        <textarea id="feedback" name="feedback" rows="5" cols="40"
+            placeholder="Enter your feedback here..."></textarea><br><br>
+    </section>
+    <section>
+        <input type="reset" value="Reset">
+        <input type="submit" value="Submit">
+        </form>
+    </SEction>
+    </form>
+
+
+
+</body>
+
+</html>
