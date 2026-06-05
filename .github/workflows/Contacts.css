@@ -1,0 +1,102 @@
+body{
+  font-family: Georgia, serif;
+  margin: 20px 60px;
+  color: #222;
+  background: #180e0e70;
+}
+
+a{
+  color: blue;
+  text-decoration: underline;
+  font-size: 18px;
+}
+
+h1{
+  font-size: 60px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+p{
+  font-size: 18px;
+  line-height: 1.5;
+  max-width: 750px;
+}
+
+label{
+  display: inline-block;
+  width: 90px;
+  font-size: 18px;
+  margin-top: 15px;
+}
+
+input[type="text"],
+input[type="email"]{
+  width: 300px;
+  padding: 8px;
+  font-size: 16px;
+  margin-top: 15px;
+}
+
+textarea{
+  width: 540px;
+  height: 140px;
+  padding: 10px;
+  font-size: 16px;
+  margin-top: 10px;
+  resize: vertical;
+}
+
+.gender{
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+.gender input{
+  margin-left: 10px;
+}
+
+h2{
+  margin-top: 40px;
+  font-size: 28px;
+  letter-spacing: 1px;
+}
+
+.interests{
+  margin-top: 15px;
+  font-size: 18px;
+}
+
+.interests label{
+  display: block;
+  width: auto;
+  margin-top: 8px;
+}
+
+button,
+input[type="submit"],
+input[type="reset"]{
+  margin-top: 20px;
+  padding: 6px 14px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.card {
+    width: 1500px;
+    padding: 30px;
+    border-radius: 12px;
+    margin-inline-start: 50px;
+    background: #6ab6c465;
+    display: inline-block;
+}
+.card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+section {
+    background: rgba(240, 245, 245, 0.904);
+    margin: 15px;
+    padding: 15px;
+    border: 1px solid #46810f;
+}
